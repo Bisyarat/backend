@@ -1,7 +1,7 @@
 {
   "name": "bisyarat-api",
   "version": "1.0.0",
-  "main": "src/server.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
