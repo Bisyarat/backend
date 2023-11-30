@@ -20,6 +20,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   feedbacks Feedback[]
+  riwayat_belajar Riwayatbelajar[]
 
   @@map("users")
 }
@@ -61,7 +62,21 @@ model Kata {
   nama_sub_kategori String @db.VarChar(50)
   kategori Kategori @relation(fields: [nama_kategori],references: [nama_kategori])
   sub_kategori Subkategori @relation(fields: [nama_sub_kategori],references: [nama_sub_kategori])
+  riwayat_belajar Riwayatbelajar[]
 
   @@map("kata")
 }
 
+model Riwayatbelajar {
+  id Int @id @default(autoincrement())
+  status Boolean
+  url_video String? @db.VarChar(100)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  id_kata Int
+  id_user Int
+  kata Kata @relation(fields: [id_kata],references: [id])
+  user User @relation(fields: [id_user],references: [id])
+
+  @@map("riwayat_belajar")
+}
