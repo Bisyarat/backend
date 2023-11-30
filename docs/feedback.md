@@ -22,6 +22,8 @@ Response Body Success :
   "data": {
     "id" : "1",
     "keterangan": "Aplikasi ini membutuhkan ...",
+    "username" : "test"
+
   }
 }
 ```
@@ -49,10 +51,14 @@ Response Body Success :
     {
     "id" : "1",
     "keterangan": "Aplikasi ini membutuhkan ...",
+    "username" : "test"
+
   } , 
   {
     "id" : "2",
     "keterangan": "Aplikasi ini membutuhkan ...",
+    "username" : "test"
+
   }
   ]
 }

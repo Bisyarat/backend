@@ -19,6 +19,49 @@ model User {
   token String? @db.VarChar(200)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  feedbacks Feedback[]
 
   @@map("users")
 }
+
+model Feedback {
+  id Int @id @default(autoincrement())
+  keterangan String  @db.VarChar(750)
+  createdAt DateTime @default(now())
+  username String @db.VarChar(50)
+  user User @relation(fields: [username],references: [username])
+
+  @@map("feedbacks")
+}
+
+model Kategori {
+  id Int @id @default(autoincrement())
+  nama_kategori String @unique @db.VarChar(50)
+  penjelasan String  @db.VarChar(500)
+  kata Kata[]
+  
+  @@map("kategori")
+}
+
+model Subkategori {
+  id Int @id @default(autoincrement())
+  nama_sub_kategori String @unique @db.VarChar(50)
+  penjelasan String  @db.VarChar(500)
+  kata Kata[]
+
+  @@map("subkategori")
+}
+
+model Kata {
+  id Int @id @default(autoincrement())
+  kata String @db.VarChar(100)
+  url_video String @db.VarChar(100)
+  penjelasan String  @db.VarChar(500)
+  nama_kategori String @db.VarChar(50)
+  nama_sub_kategori String @db.VarChar(50)
+  kategori Kategori @relation(fields: [nama_kategori],references: [nama_kategori])
+  sub_kategori Subkategori @relation(fields: [nama_sub_kategori],references: [nama_sub_kategori])
+
+  @@map("kata")
+}
+
