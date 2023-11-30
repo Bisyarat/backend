@@ -11,6 +11,7 @@
   "description": "API for Bisyarat app",
   "type": "module",
   "dependencies": {
+    "@prisma/client": "^5.6.0",
     "bcrypt": "^5.1.1",
     "express": "^4.18.2",
     "joi": "^17.11.0",
