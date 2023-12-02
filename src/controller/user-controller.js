@@ -22,6 +22,21 @@ const login = async(req,res,next)=>{
     }
 }
 
+const get = async(req,res,next) =>{
+    
+    const id = req.user.id;
+
+    try{
+        const result = await userService.get(id);
+        res.status(200).json({
+            data:result
+        });
+    }catch(e){
+        next(e);
+    }
+
+}
+
 export default {
-    register , login
+    register , login ,get
 }
