@@ -1,6 +1,6 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { getUserValidation, loginUserValidation, registerUserValidation } from "../validation/user-validation.js";
+import { getUserValidation, loginUserValidation, registerUserValidation, updateUserValidation } from "../validation/user-validation.js";
 import { validate } from "../validation/validation.js";
 import bcrypt from "bcrypt";
 import {v4 as uuid} from "uuid";
@@ -102,8 +102,73 @@ const get = async (id) => {
     return user;
 }
 
+const update = async (request) => {
+    const user = validate(updateUserValidation,request);
+
+    const validateUser = await prismaClient.user.count({
+        where:{
+            id:user.id
+        }
+    });
+
+    if(validateUser !== 1){
+        throw new ResponseError(404,"User is not found")
+    }
+
+    const data = {};
+    if(user.email){
+        const validateEmail = await prismaClient.user.count({
+            where:{
+                email:user.email
+            }
+        });
+    
+        if(validateEmail === 1){
+            throw new ResponseError(400 , "Email already exist") 
+        }else{
+            data.email=user.email;
+        }
+
+    }
+
+    if(user.username){
+        const validateUsername = await prismaClient.user.count({
+            where:{
+                username:user.username
+            }
+        });
+    
+        if(validateUsername === 1){
+            throw new ResponseError(400 , "Username already exist") 
+        }else{
+            data.username=user.username;
+        }
+    }
+
+    if(user.name){
+        data.name=user.name;
+    }
+
+    if(user.password){
+        data.password= await bcrypt.hash(user.password,10);
+    }
+
+    return prismaClient.user.update({
+        where:{
+            id:user.id
+        },
+        data:data,
+        select:{
+            id:true,
+            email:true,
+            username:true,
+            name:true,
+        }
+    })
+}
 export default {
     register,
     login,
-    get
+    get,
+    update
 }
