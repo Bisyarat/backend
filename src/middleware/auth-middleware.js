@@ -1,5 +1,5 @@
 import { prismaClient } from "../application/database.js";
-import { logger } from "../application/logging.js";
+
 
 export const authMiddleware = async (req,res,next)=>{
 
@@ -18,7 +18,7 @@ export const authMiddleware = async (req,res,next)=>{
         });
         if(!user){
             res.status(401).json({
-                errors: "Unauthorizeds"
+                errors: "Unauthorized"
             }).end();
         }else{
             req.user=user;
