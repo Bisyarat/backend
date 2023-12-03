@@ -39,10 +39,6 @@ Response Body Error :
 
 Endpoint : GET /api/feedback
 
-Headers :
-
-- Authorization : token
-
 Response Body Success :
 
 ```json
