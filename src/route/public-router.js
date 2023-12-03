@@ -10,6 +10,9 @@ publicRouter.post('/api/users/login', userController.login);
 publicRouter.get('/api/feedback' , feedbackController.get)
 publicRouter.post('/api/kategori' , kategoriController.create)
 publicRouter.get('/api/kategori' , kategoriController.get)
+publicRouter.get('/api/kategori/:id' , kategoriController.getById)
+
+
 export{
     publicRouter
 }

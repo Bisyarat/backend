@@ -5,6 +5,9 @@ const createKategoriValidation = Joi.object({
     penjelasan:Joi.string().max(500).required()
 })
 
+const getKategoriValidation = Joi.number().positive().required();
+
 export{
-    createKategoriValidation
+    createKategoriValidation ,
+    getKategoriValidation
 }
