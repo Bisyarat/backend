@@ -16,6 +16,10 @@ const create = async(request) =>{
     })
 }
 
+const get = async() =>{
+    return prismaClient.subkategori.findMany()
+}
+
 export default{
-    create
+    create , get
 }
