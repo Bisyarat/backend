@@ -9,7 +9,7 @@ publicRouter.post('/api/users', userController.register);
 publicRouter.post('/api/users/login', userController.login);
 publicRouter.get('/api/feedback' , feedbackController.get)
 publicRouter.post('/api/kategori' , kategoriController.create)
-
+publicRouter.get('/api/kategori' , kategoriController.get)
 export{
     publicRouter
 }
