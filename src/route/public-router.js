@@ -17,6 +17,7 @@ publicRouter.get('/api/kategori/:id' , kategoriController.getById)
 
 publicRouter.post('/api/subkategori' , subkategoriController.create)
 publicRouter.get('/api/subkategori' , subkategoriController.get)
+publicRouter.get('/api/subkategori/:id' , subkategoriController.getById)
 
 export{
     publicRouter
