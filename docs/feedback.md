@@ -47,12 +47,14 @@ Response Body Success :
     {
     "id" : "1",
     "keterangan": "Aplikasi ini membutuhkan ...",
+    "createdAt": "2023-12-03T07:08:17.967Z",
     "username" : "test"
 
   } , 
   {
     "id" : "2",
     "keterangan": "Aplikasi ini membutuhkan ...",
+    "createdAt": "2023-12-03T07:08:17.967Z",
     "username" : "test"
 
   }

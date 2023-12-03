@@ -16,6 +16,12 @@ const create = async(request) =>{
     })
 }
 
+const get = async() =>{
+    return prismaClient.feedback.findMany()
+}
+
+
 export default {
-    create
+    create,
+    get
 }
