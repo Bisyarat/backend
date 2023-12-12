@@ -1,5 +1,4 @@
 import { prismaClient } from "../application/database.js";
-
 import { validate } from "../validation/validation.js";
 import { ResponseError } from "../error/response-error.js";
 import { createKataValidation, getIdKataValidation } from "../validation/kata-validation.js";
