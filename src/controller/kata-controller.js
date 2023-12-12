@@ -34,6 +34,17 @@ const get = async(req,res,next) =>{
     }
 }
 
+const getById = async(req,res,next) =>{
+    try{
+        const result = await kataService.getById(req.params.id);
+        res.status(200).json({
+            data:result
+        });
+    }catch(e){
+        next(e);
+    }
+}
+
 export default{
-    create ,deleteById ,get
+    create ,deleteById ,get ,getById
 }

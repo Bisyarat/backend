@@ -35,6 +35,7 @@ const create = async(request) => {
             kata:true,
             nama_kategori:true,
             nama_sub_kategori:true,
+            url_video:true,
             penjelasan:true
         }
     })
@@ -68,9 +69,32 @@ const get = async() =>{
     return prismaClient.kata.findMany()
 }
 
+const getById = async(id) =>{
+    id = validate(getIdKataValidation,id)
 
+    const kata = await prismaClient.kata.findFirst({
+        where:{
+            id : id
+        },
+        select:{
+            id:true,
+            kata:true,
+            nama_kategori:true,
+            nama_sub_kategori:true,
+            url_video:true,
+            penjelasan:true
+        }
+    })
+    
+    if(!kata){
+        throw new ResponseError(404,"Id is not found")
+    }
+
+    return kata;
+
+}
 
 export default{
-    create ,deleteById , get
+    create ,deleteById , get ,getById
     
 }

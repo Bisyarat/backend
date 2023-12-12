@@ -23,5 +23,6 @@ publicRouter.get("/api/subkategori/:id", subkategoriController.getById);
 publicRouter.post("/api/kata", kataController.create);
 publicRouter.delete("/api/kata/:id", kataController.deleteById);
 publicRouter.get("/api/kata/", kataController.get);
+publicRouter.get("/api/kata/:id", kataController.getById);
 
 export { publicRouter };
