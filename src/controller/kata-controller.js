@@ -11,6 +11,29 @@ const create = async(req,res,next) =>{
     }
 }
 
+
+const deleteById = async(req,res,next) =>{
+    try{
+        const result = await kataService.deleteById(req.params.id);
+        res.status(200).json({
+            data:"Delete kata success"
+        });
+    }catch(e){
+        next(e);
+    }
+}
+
+const get = async(req,res,next) =>{
+    try{
+        const result = await kataService.get();
+        res.status(200).json({
+            data:result
+        });
+    }catch(e){
+        next(e);
+    }
+}
+
 export default{
-    create
+    create ,deleteById ,get
 }

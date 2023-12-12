@@ -39,44 +39,6 @@ Response Body Error :
 }
 ```
 
-## Update Kata
-
-Endpoint : PATCH /api/kata/:id
-
-Request Body :
-
-```json
-{
-  "kata": "Satu", //optional
-  "url_video": "www.satu.mp4", //optional
-  "penjelasan": "Ini adalah bahasa isyarat untuk angka satu", //optional
-  "nama_kategori": "Angka", //optional
-  "nama_sub_kategori": "Angka" //optional
-}
-```
-
-Response Body Success :
-
-```json
-{
-  "data": {
-    "id": "1",
-    "kata": "Satu",
-    "url_video": "www.satu.mp4",
-    "penjelasan": "Ini adalah bahasa isyarat untuk angka satu",
-    "nama_kategori": "Angka",
-    "nama_sub_kategori": "Angka"
-  }
-}
-```
-
-Response Body Error :
-
-```json
-{
-  "errors": "Kategori is wrong"
-}
-```
 
 ## Delete Kata
 

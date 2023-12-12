@@ -2,7 +2,7 @@ import { prismaClient } from "../application/database.js";
 
 import { validate } from "../validation/validation.js";
 import { ResponseError } from "../error/response-error.js";
-import { createKataValidation } from "../validation/kata-validation.js";
+import { createKataValidation, getIdKataValidation } from "../validation/kata-validation.js";
 
 const create = async(request) => {
     const data = validate(createKataValidation,request)
@@ -40,6 +40,37 @@ const create = async(request) => {
     })
 }
 
+const deleteById = async(id) =>{
+    id = validate(getIdKataValidation,id)
+
+    const kata = await prismaClient.kata.findFirst({
+        where:{
+            id : id
+        },
+        select:{
+            id:true
+        }
+    })
+    
+    if(!kata){
+        throw new ResponseError(404,"Id is not found")
+    }
+
+    return await prismaClient.kata.delete({
+        where:{
+            id : id
+        }
+    })
+
+}
+
+const get = async() =>{
+    return prismaClient.kata.findMany()
+}
+
+
+
 export default{
-    create
+    create ,deleteById , get
+    
 }
