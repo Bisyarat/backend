@@ -3,6 +3,7 @@ import userController from "../controller/user-controller.js";
 import feedbackController from "../controller/feedback-controller.js";
 import kategoriController from "../controller/kategori-controller.js";
 import subkategoriController from "../controller/subkategori-controller.js";
+import kataController from "../controller/kata-controller.js";
 
 const publicRouter = express.Router();
 
@@ -18,6 +19,8 @@ publicRouter.get('/api/kategori/:id' , kategoriController.getById)
 publicRouter.post('/api/subkategori' , subkategoriController.create)
 publicRouter.get('/api/subkategori' , subkategoriController.get)
 publicRouter.get('/api/subkategori/:id' , subkategoriController.getById)
+
+publicRouter.post('/api/kata' , kataController.create)
 
 export{
     publicRouter
