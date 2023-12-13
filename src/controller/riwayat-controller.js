@@ -34,6 +34,24 @@ const update = async(req,res,next) =>{
 
 }
 
+const deleteByIdKata = async(req,res,next) =>{
+
+    try{
+        const request = {};
+        const id_user = req.user.id;
+        const id_kata = req.params.id_kata
+        request.id_user = id_user;
+        request.id_kata = id_kata;
+        const result = await riwayatService.deleteByIdKata(request);
+        res.status(200).json({
+            data:"Delete Riwayat Success"
+        });
+    }catch(e){
+        next(e);
+    }
+
+}
+
 export default{
-    create , update
+    create , update , deleteByIdKata
 }

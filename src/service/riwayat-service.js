@@ -3,6 +3,7 @@ import { validate } from "../validation/validation.js";
 import { ResponseError } from "../error/response-error.js";
 import {
   createRiwayatValidation,
+  deleteRiwayatValidation,
   updateRiwayatValidation,
 } from "../validation/riwayat-validation.js";
 
@@ -90,7 +91,39 @@ const update = async (request) => {
   });
 };
 
+
+const deleteByIdKata= async (request) => {
+  const data = validate(deleteRiwayatValidation, request);
+
+  const validateUser = await prismaClient.user.count({
+    where: {
+      id: data.id_user,
+    },
+  });
+
+  if (validateUser !== 1) {
+    throw new ResponseError(404, "User is not found");
+  }
+
+  const validateKata = await prismaClient.kata.count({
+    where: {
+      id: data.id_kata,
+    },
+  });
+
+  if (validateKata !== 1) {
+    throw new ResponseError(404, "Kata is not found");
+  }
+
+  return prismaClient.riwayatbelajar.delete({
+    where: {
+      id_user: data.id_user,
+      id_kata: data.id_kata,
+    }
+  })
+}
+
 export default {
   create,
-  update,
+  update,deleteByIdKata
 };

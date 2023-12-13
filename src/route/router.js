@@ -14,4 +14,6 @@ userRouter.post("/api/feedback", feedbackController.create);
 
 userRouter.post("/api/riwayat", riwayatController.create);
 userRouter.patch("/api/riwayat/:id_kata", riwayatController.update);
+userRouter.delete("/api/riwayat/:id_kata", riwayatController.deleteByIdKata);
+
 export { userRouter };
