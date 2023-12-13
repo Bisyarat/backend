@@ -59,9 +59,9 @@ model Kata {
   url_video String @db.VarChar(100)
   penjelasan String  @db.VarChar(500)
   nama_kategori String @db.VarChar(50)
-  nama_sub_kategori String @db.VarChar(50)
+  nama_sub_kategori String? @db.VarChar(50)
   kategori Kategori @relation(fields: [nama_kategori],references: [nama_kategori])
-  sub_kategori Subkategori @relation(fields: [nama_sub_kategori],references: [nama_sub_kategori])
+  sub_kategori Subkategori? @relation(fields: [nama_sub_kategori],references: [nama_sub_kategori])
   riwayat_belajar Riwayatbelajar[]
 
   @@map("kata")

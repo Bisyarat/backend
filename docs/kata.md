@@ -124,3 +124,40 @@ Response Body Error :
 }
 ```
 
+
+## Get Kata and status 
+
+Endpoint : GET /api/kata/status
+
+Headers :
+- Authorization : token
+
+Query Params (Hanya gunakan salah satu) : 
+- nama_kategori : nama dari kategori,
+- nama_sub_kategori : nama dari sub kategori
+
+Response Body Success :
+
+```json
+{
+  "data": {
+    "id": 1,
+    "kata": "Satu",
+    "riwayat_belajar": [
+      {
+        "status": false
+      }
+    ]
+  }
+}
+```
+
+Response Body Error :
+
+```json
+{
+  "errors": "Kategori is wrong"
+}
+```
+
+
