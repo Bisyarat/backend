@@ -3,6 +3,7 @@ import userController from "../controller/user-controller.js";
 import { authMiddleware } from "../middleware/auth-middleware.js";
 import feedbackController from "../controller/feedback-controller.js";
 import riwayatController from "../controller/riwayat-controller.js";
+import kataController from "../controller/kata-controller.js";
 
 const userRouter = express.Router();
 userRouter.use(authMiddleware);
@@ -18,5 +19,6 @@ userRouter.delete("/api/riwayat/:id_kata", riwayatController.deleteByIdKata);
 userRouter.get("/api/riwayat", riwayatController.get);
 userRouter.get("/api/riwayat/:id_kata", riwayatController.getByIdKata);
 
+userRouter.get("/api/status/kata", kataController.getKataStatus);
 
 export { userRouter };
