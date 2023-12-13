@@ -7,6 +7,7 @@ import {
   getUserValidation,
   updateRiwayatValidation,
 } from "../validation/riwayat-validation.js";
+import { logger } from "../application/logging.js";
 
 const create = async (request) => {
   const data = validate(createRiwayatValidation, request);
@@ -69,21 +70,40 @@ const update = async (request) => {
     throw new ResponseError(404, "Kata is not found");
   }
 
+  const validateRiwayat = await prismaClient.riwayatbelajar.count({
+    where: {
+      id_user: data.id_user,
+      id_kata: data.id_kata,
+    },
+  });
+
+  if (validateRiwayat !== 1) {
+    throw new ResponseError(404, "Riwayat is not found");
+  }
+
   const data2 = {};
 
   if (data.url_video) {
     data2.url_video = data.url_video;
   }
-  if (data.status) {
+
+  if (data.status !== undefined) {
     data2.status = data.status;
   }
 
-  return prismaClient.riwayatbelajar.update({
+  const riwayat = await prismaClient.riwayatbelajar.findFirst({
     where: {
       id_user: data.id_user,
       id_kata: data.id_kata,
+    }
+  });
+
+
+  return prismaClient.riwayatbelajar.update({
+    where: {
+      id: riwayat.id
     },
-    data: data,
+    data: data2,
     select: {
       status: true,
       url_video: true,
@@ -92,8 +112,7 @@ const update = async (request) => {
   });
 };
 
-
-const deleteByIdKata= async (request) => {
+const deleteByIdKata = async (request) => {
   const data = validate(getRiwayatValidation, request);
 
   const validateUser = await prismaClient.user.count({
@@ -116,28 +135,35 @@ const deleteByIdKata= async (request) => {
     throw new ResponseError(404, "Kata is not found");
   }
 
-  return prismaClient.riwayatbelajar.delete({
+  const riwayat = await prismaClient.riwayatbelajar.findFirst({
     where: {
       id_user: data.id_user,
       id_kata: data.id_kata,
-    }
-  })
-}
+    },
+    select: { id: true },
+  });
 
-const get = async(request) =>{
+  return prismaClient.riwayatbelajar.delete({
+    where: {
+      id: riwayat.id,
+    },
+  });
+};
+
+const get = async (request) => {
   const data = validate(getUserValidation, request);
 
-
-  return prismaClient.kata.findMany({
-    where:{
-      id_user:data
-    },select: {
+  return prismaClient.riwayatbelajar.findMany({
+    where: {
+      id_user: data,
+    },
+    select: {
       status: true,
       url_video: true,
       id_kata: true,
     },
-  })
-}
+  });
+};
 
 const getByIdKata= async (request) => {
   const data = validate(getRiwayatValidation, request);
@@ -152,6 +178,17 @@ const getByIdKata= async (request) => {
     throw new ResponseError(404, "User is not found");
   }
 
+  const validateRiwayat = await prismaClient.riwayatbelajar.count({
+    where: {
+      id_user: data.id_user,
+      id_kata: data.id_kata,
+    },
+  });
+
+  if (validateRiwayat !== 1) {
+    throw new ResponseError(404, "Riwayat is not found");
+  }
+  
   const validateKata = await prismaClient.kata.count({
     where: {
       id: data.id_kata,
@@ -161,6 +198,7 @@ const getByIdKata= async (request) => {
   if (validateKata !== 1) {
     throw new ResponseError(404, "Kata is not found");
   }
+  
 
   return prismaClient.riwayatbelajar.findFirst({
     where: {
@@ -176,5 +214,8 @@ const getByIdKata= async (request) => {
 
 export default {
   create,
-  update,deleteByIdKata ,get ,getByIdKata
+  update,
+  deleteByIdKata,
+  get,
+  getByIdKata,
 };
