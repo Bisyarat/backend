@@ -14,9 +14,11 @@ const updateRiwayatValidation = Joi.object({
   id_user: Joi.number().required()
 });
 
-const deleteRiwayatValidation = Joi.object({
+const getRiwayatValidation = Joi.object({
   id_kata: Joi.number().required(),
   id_user: Joi.number().required()
 });
 
-export { createRiwayatValidation , updateRiwayatValidation ,deleteRiwayatValidation};
+const getUserValidation = Joi.number().required();
+
+export { createRiwayatValidation , updateRiwayatValidation ,getRiwayatValidation ,getUserValidation};

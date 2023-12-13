@@ -3,7 +3,8 @@ import { validate } from "../validation/validation.js";
 import { ResponseError } from "../error/response-error.js";
 import {
   createRiwayatValidation,
-  deleteRiwayatValidation,
+  getRiwayatValidation,
+  getUserValidation,
   updateRiwayatValidation,
 } from "../validation/riwayat-validation.js";
 
@@ -93,7 +94,7 @@ const update = async (request) => {
 
 
 const deleteByIdKata= async (request) => {
-  const data = validate(deleteRiwayatValidation, request);
+  const data = validate(getRiwayatValidation, request);
 
   const validateUser = await prismaClient.user.count({
     where: {
@@ -123,7 +124,18 @@ const deleteByIdKata= async (request) => {
   })
 }
 
+const get = async(request) =>{
+  const data = validate(getUserValidation, request);
+
+
+  return prismaClient.kata.findMany({
+    where:{
+      id_user:data
+    }
+  })
+}
+
 export default {
   create,
-  update,deleteByIdKata
+  update,deleteByIdKata ,get
 };
