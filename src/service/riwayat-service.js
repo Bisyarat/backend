@@ -131,11 +131,50 @@ const get = async(request) =>{
   return prismaClient.kata.findMany({
     where:{
       id_user:data
-    }
+    },select: {
+      status: true,
+      url_video: true,
+      id_kata: true,
+    },
+  })
+}
+
+const getByIdKata= async (request) => {
+  const data = validate(getRiwayatValidation, request);
+
+  const validateUser = await prismaClient.user.count({
+    where: {
+      id: data.id_user,
+    },
+  });
+
+  if (validateUser !== 1) {
+    throw new ResponseError(404, "User is not found");
+  }
+
+  const validateKata = await prismaClient.kata.count({
+    where: {
+      id: data.id_kata,
+    },
+  });
+
+  if (validateKata !== 1) {
+    throw new ResponseError(404, "Kata is not found");
+  }
+
+  return prismaClient.riwayatbelajar.findFirst({
+    where: {
+      id_user: data.id_user,
+      id_kata: data.id_kata,
+    },select: {
+      status: true,
+      url_video: true,
+      id_kata: true,
+    },
   })
 }
 
 export default {
   create,
-  update,deleteByIdKata ,get
+  update,deleteByIdKata ,get ,getByIdKata
 };

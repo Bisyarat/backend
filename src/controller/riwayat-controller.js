@@ -52,6 +52,24 @@ const deleteByIdKata = async(req,res,next) =>{
 
 }
 
+const getByIdKata = async(req,res,next) =>{
+
+    try{
+        const request = {};
+        const id_user = req.user.id;
+        const id_kata = req.params.id_kata
+        request.id_user = id_user;
+        request.id_kata = id_kata;
+        const result = await riwayatService.getByIdKata(request);
+        res.status(200).json({
+            data:"Delete Riwayat Success"
+        });
+    }catch(e){
+        next(e);
+    }
+
+}
+
 const get = async(req,res,next) =>{
 
     try{
@@ -67,5 +85,5 @@ const get = async(req,res,next) =>{
 }
 
 export default{
-    create , update , deleteByIdKata,get
+    create , update , deleteByIdKata,get ,getByIdKata
 }

@@ -16,5 +16,7 @@ userRouter.post("/api/riwayat", riwayatController.create);
 userRouter.patch("/api/riwayat/:id_kata", riwayatController.update);
 userRouter.delete("/api/riwayat/:id_kata", riwayatController.deleteByIdKata);
 userRouter.get("/api/riwayat", riwayatController.get);
+userRouter.get("/api/riwayat/:id_kata", riwayatController.getByIdKata);
+
 
 export { userRouter };
