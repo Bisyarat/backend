@@ -23,10 +23,9 @@ Response Body Success :
 ```json
 {
   "data": {
-    "id": "1",
     "status": "false",
     "url_video": "www.satu.mp4",
-    "kata": "Satu"
+    "id_kata": "1"
   }
 }
 ```
@@ -41,7 +40,7 @@ Response Body Error :
 
 ## Update Riwayat Belajar
 
-Endpoint : PATCH /api/riwayat/:id
+Endpoint : PATCH /api/riwayat/:id_kata
 
 Headers :
 
@@ -61,10 +60,9 @@ Response Body Success :
 ```json
 {
   "data": {
-    "id": "1",
     "status": "false",
     "url_video": "www.satu.mp4",
-    "kata": "Satu"
+    "id_kata": "1"
   }
 }
 ```
@@ -79,7 +77,7 @@ Response Body Error :
 
 ## Delete Riwayat Belajar
 
-Endpoint : DELETE /api/riwayat/:id
+Endpoint : DELETE /api/riwayat/:id_kata
 
 Headers :
 
