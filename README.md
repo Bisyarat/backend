@@ -2,16 +2,16 @@
 
 # General
 General Information : 
-Node JS v16.20.2
-Database PostgreSQL
+- Node JS v16.20.2
+- Database PostgreSQL
 
 # Library : 
-Express JS (Framework)
-Joi (Validation)
-Prisma (DB ORM)
-Winston (Logging)
-Bcrypt (Enkripsi) 
-UUID (Unique Identifier)
+- Express JS (Framework)
+- Joi (Validation)
+- Prisma (DB ORM)
+- Winston (Logging)
+- Bcrypt (Enkripsi) 
+- UUID (Unique Identifier)
 
 # API Requirement 
 
