@@ -70,3 +70,12 @@ https://github.com/Bisyarat/backend/tree/main/docs
 - Cloud storage for storing objects
 
 
+# Step
+- First install all of the requirement , for the library use “npm install”
+- Set up the express js ,winston ,and prisma
+- Make the database model using prisma and migrate it to the database
+- Create router , controller , validation and services for all of the API requirements
+- Run the express js and test the endpoint in postman
+
+
+
